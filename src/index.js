@@ -8,19 +8,21 @@ import ProductDetail from './pages/ProductDetail';
 import MyCart from './pages/MyCart';
 import NotFound from './pages/NotFound';
 import AddNewProduct from './pages/AddNewProduct';
+import Home from './pages/Home';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <NotFound />,
     children: [
+      { index: true, path: '/', element: <Home /> },
       { path: '/products', element: <Products /> },
       { path: '/products/:productId', element: <ProductDetail /> },
       { path: '/my-cart', element: <MyCart /> },
       { path: '/products/new', element: <AddNewProduct /> },
     ],
   },
-  { path: '*', element: <NotFound /> },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
