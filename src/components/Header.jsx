@@ -4,22 +4,28 @@ import { Link } from 'react-router-dom';
 
 function Header() {
   return (
-    <header>
-      <Link to="/">
+    <header className="flex justify-between items-center border-b-2 border-rose-200 p-4">
+      <Link to="/" className="flex text-2xl text-rose-400 items-center gap-2">
         <ShoppingBagOpen />
         Shop
       </Link>
-      <div>
+      <div className="flex gap-2 items-center">
         <Link to="/products">Products</Link>
-        <Link to="/my-cart">
+        <Link
+          to="/my-cart"
+          className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800"
+        >
           <ShoppingCartSimple />
         </Link>
-        <Link to="products/new">
+        <Link
+          to="products/new"
+          className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800"
+        >
           <Pencil />
         </Link>
-        <span>User Img</span>
-        <span>UserName</span>
-        <button>Login/Logout</button>
+        <button className="rounded-md bg-rose-200 text-gray-600 p-2">
+          Login/Logout
+        </button>
       </div>
     </header>
   );
