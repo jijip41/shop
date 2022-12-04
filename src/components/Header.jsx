@@ -21,7 +21,7 @@ function Header() {
             navigate('/my-cart');
           }}
         />
-        <Pencil />
+        <Pencil onClick={() => navigate('products/new')} />
         <span>User Img</span>
         <span>UserName</span>
         <button>Login/Logout</button>
