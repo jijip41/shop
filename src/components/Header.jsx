@@ -6,7 +6,11 @@ function Header() {
   const navigate = useNavigate();
   return (
     <header>
-      <div>
+      <div
+        onClick={() => {
+          navigate('/');
+        }}
+      >
         <ShoppingBagOpen />
         <p>Shop</p>
       </div>
