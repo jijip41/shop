@@ -1,27 +1,22 @@
 import React from 'react';
 import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Header() {
-  const navigate = useNavigate();
   return (
     <header>
-      <div
-        onClick={() => {
-          navigate('/');
-        }}
-      >
+      <Link to="/">
         <ShoppingBagOpen />
-        <p>Shop</p>
-      </div>
+        Shop
+      </Link>
       <div>
-        <span onClick={() => navigate('/products')}>Products</span>
-        <ShoppingCartSimple
-          onClick={() => {
-            navigate('/my-cart');
-          }}
-        />
-        <Pencil onClick={() => navigate('products/new')} />
+        <Link to="/products">Products</Link>
+        <Link to="/my-cart">
+          <ShoppingCartSimple />
+        </Link>
+        <Link to="products/new">
+          <Pencil />
+        </Link>
         <span>User Img</span>
         <span>UserName</span>
         <button>Login/Logout</button>
