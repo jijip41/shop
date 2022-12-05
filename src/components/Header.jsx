@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
+import { login } from '../api/firebase';
 
 function Header() {
   return (
@@ -23,7 +24,10 @@ function Header() {
         >
           <Pencil />
         </Link>
-        <button className="rounded-md bg-rose-200 text-gray-600 p-2">
+        <button
+          className="rounded-md bg-rose-200 text-gray-600 p-2"
+          onClick={login}
+        >
           Login/Logout
         </button>
       </div>
