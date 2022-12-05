@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
-import { login, logout } from '../api/firebase';
+import { login, logout, onUserStateChange } from '../api/firebase';
 
 function Header() {
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [user, setUser] = useState();
 
+  const handleLogin = async () => {
+    await login().then(setUser);
+  };
+
+  const handleLogout = () => {
+    logout().then(setUser);
+  };
+
+  useEffect(() => {
+    onUserStateChange(setUser);
+  }, []);
   return (
     <header className="flex justify-between items-center border-b-2 border-rose-200 p-4">
       <Link to="/" className="flex text-2xl text-rose-400 items-center gap-2">
@@ -26,15 +37,23 @@ function Header() {
         >
           <Pencil />
         </Link>
-        <button
-          className="rounded-md bg-rose-200 text-gray-600 p-2"
-          onClick={() => {
-            userLoggedIn ? logout() : login();
-            setUserLoggedIn(!userLoggedIn);
-          }}
-        >
-          {userLoggedIn ? 'Logout' : 'Login'}
-        </button>
+
+        {user && (
+          <button
+            className="rounded-md bg-rose-200 text-gray-600 p-2"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        )}
+        {!user && (
+          <button
+            className="rounded-md bg-rose-200 text-gray-600 p-2"
+            onClick={handleLogin}
+          >
+            Login
+          </button>
+        )}
       </div>
     </header>
   );
