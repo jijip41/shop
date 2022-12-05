@@ -6,14 +6,6 @@ import { login, logout, onUserStateChange } from '../api/firebase';
 function Header() {
   const [user, setUser] = useState();
 
-  const handleLogin = async () => {
-    await login().then(setUser);
-  };
-
-  const handleLogout = () => {
-    logout().then(setUser);
-  };
-
   useEffect(() => {
     onUserStateChange(setUser);
   }, []);
@@ -41,7 +33,7 @@ function Header() {
         {user && (
           <button
             className="rounded-md bg-rose-200 text-gray-600 p-2"
-            onClick={handleLogout}
+            onClick={logout}
           >
             Logout
           </button>
@@ -49,7 +41,7 @@ function Header() {
         {!user && (
           <button
             className="rounded-md bg-rose-200 text-gray-600 p-2"
-            onClick={handleLogin}
+            onClick={login}
           >
             Login
           </button>

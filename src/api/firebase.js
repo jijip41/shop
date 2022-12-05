@@ -18,20 +18,11 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 export async function login() {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      const user = result.user;
-      return user;
-    })
-    .catch(console.error);
+  signInWithPopup(auth, provider).catch(console.error);
 }
 
 export async function logout() {
-  signOut(auth)
-    .then(() => {
-      return null;
-    })
-    .catch(console.error);
+  signOut(auth).catch(console.error);
 }
 
 export function onUserStateChange(callback) {
