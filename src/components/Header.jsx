@@ -6,7 +6,7 @@ import User from './User';
 
 function Header() {
   const [user, setUser] = useState();
-  const isAdmin = true;
+  const isAdmin = false;
   useEffect(() => {
     onUserStateChange(setUser);
   }, []);
