@@ -6,6 +6,7 @@ import User from './User';
 
 function Header() {
   const [user, setUser] = useState();
+
   useEffect(() => {
     onUserStateChange(setUser);
   }, []);
