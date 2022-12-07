@@ -6,10 +6,11 @@ import User from './User';
 
 function Header() {
   const [user, setUser] = useState();
-  const isAdmin = false;
   useEffect(() => {
     onUserStateChange(setUser);
   }, []);
+
+  const isAdmin = user?.isAdmin;
 
   return (
     <header className="flex justify-between items-center border-b-2 border-rose-200 p-4">
