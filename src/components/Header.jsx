@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
-import { login, logout, onUserStateChange } from '../api/firebase';
 import User from './User';
+import { useAuthContext } from './context/AuthContext';
 
 function Header() {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    onUserStateChange(setUser);
-  }, []);
+  const { user, login, logout } = useAuthContext();
 
   const isAdmin = user?.isAdmin;
 
