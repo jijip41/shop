@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         path: '/my-cart',
         element: (
           <ProtectedRoute>
-            <MyCart />{' '}
+            <MyCart />
           </ProtectedRoute>
         ),
       },

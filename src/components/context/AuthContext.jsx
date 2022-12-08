@@ -9,6 +9,7 @@ export function AuthContextProvider({ children }) {
   useEffect(() => {
     onUserStateChange(setUser);
   }, []);
+
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}

@@ -3,6 +3,8 @@ import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import User from './User';
 import { useAuthContext } from './context/AuthContext';
+import SignButton from './SignButton';
+import HeaderIcon from './HeaderIcon';
 
 function Header() {
   const { user, login, logout } = useAuthContext();
@@ -18,38 +20,11 @@ function Header() {
       <div className="flex gap-2 items-center">
         <Link to="/products">Products</Link>
         {user && <User user={user} />}
-        {user && (
-          <Link
-            to="/my-cart"
-            className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800"
-          >
-            <ShoppingCartSimple />
-          </Link>
-        )}
-        {isAdmin && (
-          <Link
-            to="products/new"
-            className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800"
-          >
-            <Pencil />
-          </Link>
-        )}
-        {user && (
-          <button
-            className="rounded-md bg-rose-200 text-gray-600 p-2"
-            onClick={logout}
-          >
-            Logout
-          </button>
-        )}
-        {!user && (
-          <button
-            className="rounded-md bg-rose-200 text-gray-600 p-2"
-            onClick={login}
-          >
-            Login
-          </button>
-        )}
+        {user && <HeaderIcon to="/my-cart" icon={<ShoppingCartSimple />} />}
+        {isAdmin && <HeaderIcon to="/products/new" icon={<Pencil />} />}
+
+        {user && <SignButton content="LogOut" onClick={logout} />}
+        {!user && <SignButton content="LogIn" onClick={login} />}
       </div>
     </header>
   );
