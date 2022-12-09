@@ -7,7 +7,7 @@ function ProtectedRoute({ children, requiredAdmin }) {
   if (!user || (requiredAdmin && !user.isAdmin)) {
     return <Navigate to="/" replace></Navigate>;
   }
-  return { children };
+  return children;
 }
 
 export default ProtectedRoute;
