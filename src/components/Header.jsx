@@ -20,8 +20,16 @@ function Header() {
       <div className="flex gap-2 items-center">
         <Link to="/products">Products</Link>
         {user && <User user={user} />}
-        {user && <HeaderIcon to="/my-cart" icon={<ShoppingCartSimple />} />}
-        {isAdmin && <HeaderIcon to="/products/new" icon={<Pencil />} />}
+        {user && (
+          <HeaderIcon to="/my-cart">
+            <ShoppingCartSimple />
+          </HeaderIcon>
+        )}
+        {isAdmin && (
+          <HeaderIcon to="/products/new">
+            <Pencil />
+          </HeaderIcon>
+        )}
 
         {user && <SignButton content="LogOut" onClick={logout} />}
         {!user && <SignButton content="LogIn" onClick={login} />}
