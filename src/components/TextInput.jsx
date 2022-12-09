@@ -1,10 +1,10 @@
 import React from 'react';
 
-function TextInput({ placeholder }) {
+function TextInput({ placeholder, type }) {
   return (
     <input
-      type="text"
-      className="border-2 border-black"
+      type={type}
+      className=" border-2 border-rose-300 w-auto pl-4 py-2"
       placeholder={placeholder}
     ></input>
   );
