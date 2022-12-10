@@ -48,21 +48,7 @@ async function getUserWithAdmin(user) {
     .catch(console.error);
 }
 
-export function writeProductData(
-  name,
-  price,
-  category,
-  description,
-  options,
-  imageUrl
-) {
+export function writeProductData(inputValue) {
   const db = getDatabase();
-  set(ref(db, 'products/'), {
-    name,
-    price,
-    category,
-    description,
-    options,
-    imageUrl,
-  });
+  set(ref(db, 'products'), inputValue);
 }
