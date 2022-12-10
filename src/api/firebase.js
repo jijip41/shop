@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from 'firebase/auth';
-import { getDatabase, get, ref } from 'firebase/database';
+import { getDatabase, get, ref, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -46,4 +46,23 @@ async function getUserWithAdmin(user) {
       return user;
     })
     .catch(console.error);
+}
+
+export function writeProductData(
+  name,
+  price,
+  category,
+  description,
+  options,
+  imageUrl
+) {
+  const db = getDatabase();
+  set(ref(db, 'products/'), {
+    name,
+    price,
+    category,
+    description,
+    options,
+    imageUrl,
+  });
 }
