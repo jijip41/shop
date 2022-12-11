@@ -46,7 +46,7 @@ function AddNewProduct() {
         <img
           src={URL.createObjectURL(file)}
           alt="Local file"
-          className="w-82"
+          className="w-72"
         ></img>
       )}
       <form
@@ -65,6 +65,7 @@ function AddNewProduct() {
         <input
           type="text"
           name="name"
+          required
           placeholder="Name"
           value={product.name ?? ''}
           onChange={handleChange}
@@ -72,6 +73,7 @@ function AddNewProduct() {
         <input
           type="number"
           name="price"
+          required
           placeholder="Price"
           value={product.price ?? ''}
           onChange={handleChange}
@@ -79,6 +81,7 @@ function AddNewProduct() {
         <input
           type="text"
           name="category"
+          required
           placeholder="Category"
           value={product.category ?? ''}
           onChange={handleChange}
@@ -86,13 +89,15 @@ function AddNewProduct() {
         <input
           type="text"
           name="description"
+          required
           placeholder="Description"
-          value={product.dscription ?? ''}
+          value={product.description ?? ''}
           onChange={handleChange}
         />
         <input
           type="text"
           name="options"
+          required
           placeholder="Options"
           value={product.options ?? ''}
           onChange={handleChange}
