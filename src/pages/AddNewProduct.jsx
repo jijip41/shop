@@ -11,7 +11,10 @@ function AddNewProduct() {
     e.preventDefault();
     uploadImg(file)
       .then((url) => setProduct((product) => ({ ...product, imageUrl: url })))
-      .then(addProduct(product));
+      .then(addProduct(product))
+      .then(setProduct({}))
+      .then(setFile())
+      .then(e.target.reset());
   };
 
   const handleChange = (e) => {
@@ -47,7 +50,7 @@ function AddNewProduct() {
           onChange={handleChange}
         />
         <TextInput
-          type="text"
+          type="number"
           name="price"
           placeholder="Price"
           value={product.price ?? ''}
