@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { getDatabase, get, ref, set } from 'firebase/database';
+import { v4 as uuid } from 'uuid';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -48,7 +49,13 @@ async function getUserWithAdmin(user) {
     .catch(console.error);
 }
 
-export function writeProductData(inputValue) {
+export function addProduct(inputValue) {
   const db = getDatabase();
-  set(ref(db, 'products'), inputValue);
+  const id = uuid();
+  set(ref(db, `products/${id}`), {
+    ...inputValue,
+    id,
+    price: parseInt(inputValue.price),
+    options: inputValue.options.split(','),
+  });
 }
