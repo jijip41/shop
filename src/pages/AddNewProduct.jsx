@@ -26,8 +26,11 @@ function AddNewProduct() {
     setProduct((product) => ({ ...product, [name]: value }));
   };
   return (
-    <main className="flex flex-col items-center">
-      <h2> Add new products</h2>
+    <main className="flex flex-col items-center pt-4">
+      <h2 className="font-bold text-lg text-zinc-800 bg-rose-200 rounded-md p-2">
+        {' '}
+        Add new products
+      </h2>
       {file && <img src={URL.createObjectURL(file)} alt="Local file"></img>}
       <form
         action=""
@@ -35,13 +38,13 @@ function AddNewProduct() {
         className="flex flex-col space-y-4 w-full p-10"
         onSubmit={handleSubmit}
       >
-        <input
+        <TextInput
           type="file"
           accept="image/*"
           required
           name="file"
           onChange={handleChange}
-        ></input>
+        ></TextInput>
         <TextInput
           type="text"
           name="name"
