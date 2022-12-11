@@ -1,13 +1,18 @@
 import { Outlet } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthContextProvider } from './components/context/AuthContext';
 import Header from './components/Header';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div className="App">
       <AuthContextProvider>
-        <Header />
-        <Outlet />
+        <QueryClientProvider client={queryClient}>
+          <Header />
+          <Outlet />
+        </QueryClientProvider>
       </AuthContextProvider>
     </div>
   );
