@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import TextInput from '../components/TextInput';
-import { writeProductData } from '../api/firebase';
+import { uploadImg } from '../api/uploader';
+import { addProduct } from '../api/firebase';
 
 function AddNewProduct() {
   const [product, setProduct] = useState({});
+  const [file, setFile] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const value = {
-      name: 'aaa',
-      price: 'aaa',
-      category: 'aaa',
-      description: 'aaa',
-      options: 'aaa',
-      imageUrl: 'www.aaa.aaa',
-    };
-    writeProductData(value);
+    uploadImg(file)
+      .then((url) => setProduct((product) => ({ ...product, imageUrl: url })))
+      .then(addProduct(product));
   };
-
-  const [file, setFile] = useState();
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -48,31 +41,35 @@ function AddNewProduct() {
         ></input>
         <TextInput
           type="text"
-          namd=""
+          name="name"
           placeholder="Name"
           value={product.name ?? ''}
           onChange={handleChange}
         />
         <TextInput
           type="text"
+          name="price"
           placeholder="Price"
           value={product.price ?? ''}
           onChange={handleChange}
         />
         <TextInput
           type="text"
+          name="category"
           placeholder="Category"
           value={product.category ?? ''}
           onChange={handleChange}
         />
         <TextInput
           type="text"
+          name="description"
           placeholder="Description"
           value={product.dscription ?? ''}
           onChange={handleChange}
         />
         <TextInput
           type="text"
+          name="options"
           placeholder="Options"
           value={product.options ?? ''}
           onChange={handleChange}
