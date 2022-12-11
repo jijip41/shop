@@ -52,7 +52,7 @@ async function getUserWithAdmin(user) {
 export function addProduct(inputValue) {
   const db = getDatabase();
   const id = uuid();
-  set(ref(db, `products/${id}`), {
+  return set(ref(db, `products/${id}`), {
     ...inputValue,
     id,
     price: parseInt(inputValue.price),

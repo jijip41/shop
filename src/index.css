@@ -20,3 +20,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+input {
+  @apply border border-rose-300 w-auto pl-4 py-2;
+}

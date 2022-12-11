@@ -1,20 +1,31 @@
 import React, { useState } from 'react';
-import TextInput from '../components/TextInput';
 import { uploadImg } from '../api/uploader';
 import { addProduct } from '../api/firebase';
 
 function AddNewProduct() {
   const [product, setProduct] = useState({});
   const [file, setFile] = useState();
+  const [isUploading, setIsUploading] = useState(false);
+  const [success, setSuccess] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsUploading(true);
     uploadImg(file)
       .then((url) => setProduct((product) => ({ ...product, imageUrl: url })))
-      .then(addProduct(product))
+      .then(
+        addProduct(product) //
+          .then(() => {
+            setSuccess('Product is successfully added.');
+            setTimeout(() => {
+              setSuccess(null);
+            }, 5000);
+          })
+      )
       .then(setProduct({}))
       .then(setFile())
-      .then(e.target.reset());
+      .then(e.target.reset())
+      .finally(() => setIsUploading(false));
   };
 
   const handleChange = (e) => {
@@ -26,54 +37,60 @@ function AddNewProduct() {
     setProduct((product) => ({ ...product, [name]: value }));
   };
   return (
-    <main className="flex flex-col items-center pt-4">
+    <main className="flex flex-col items-center pt-4 space-y-2">
       <h2 className="font-bold text-lg text-zinc-800 bg-rose-200 rounded-md p-2">
-        {' '}
         Add new products
       </h2>
-      {file && <img src={URL.createObjectURL(file)} alt="Local file"></img>}
+      {success && <p className="text-zinc-700 font-semibold ">{success} </p>}
+      {file && (
+        <img
+          src={URL.createObjectURL(file)}
+          alt="Local file"
+          className="w-82"
+        ></img>
+      )}
       <form
         action=""
         method="POST"
-        className="flex flex-col space-y-4 w-full p-10"
+        className="flex flex-col space-y-4 w-full p-4"
         onSubmit={handleSubmit}
       >
-        <TextInput
+        <input
           type="file"
           accept="image/*"
-          required
           name="file"
+          required
           onChange={handleChange}
-        ></TextInput>
-        <TextInput
+        ></input>
+        <input
           type="text"
           name="name"
           placeholder="Name"
           value={product.name ?? ''}
           onChange={handleChange}
         />
-        <TextInput
+        <input
           type="number"
           name="price"
           placeholder="Price"
           value={product.price ?? ''}
           onChange={handleChange}
         />
-        <TextInput
+        <input
           type="text"
           name="category"
           placeholder="Category"
           value={product.category ?? ''}
           onChange={handleChange}
         />
-        <TextInput
+        <input
           type="text"
           name="description"
           placeholder="Description"
           value={product.dscription ?? ''}
           onChange={handleChange}
         />
-        <TextInput
+        <input
           type="text"
           name="options"
           placeholder="Options"
@@ -81,8 +98,11 @@ function AddNewProduct() {
           onChange={handleChange}
         />
 
-        <button className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800">
-          Add product
+        <button
+          className="rounded-full border-2 border-rose-200 text-gray-600 p-2 hover:bg-rose-50 hover:text-gray-800"
+          disabled={isUploading}
+        >
+          {isUploading ? 'Uploading...' : 'Add product'}
         </button>
       </form>
     </main>
