@@ -3,7 +3,7 @@ import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import User from './User';
 import { useAuthContext } from './context/AuthContext';
-import SignButton from './SignButton';
+import Button from './Button';
 import HeaderIcon from './HeaderIcon';
 
 function Header() {
@@ -31,8 +31,8 @@ function Header() {
           </HeaderIcon>
         )}
 
-        {user && <SignButton content="LogOut" onClick={logout} />}
-        {!user && <SignButton content="LogIn" onClick={login} />}
+        {user && <Button content="LogOut" onClick={logout} />}
+        {!user && <Button content="LogIn" onClick={login} />}
       </div>
     </header>
   );
