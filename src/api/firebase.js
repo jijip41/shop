@@ -56,7 +56,7 @@ export function addProduct(inputValue) {
     ...inputValue,
     id,
     price: parseInt(inputValue.price),
-    options: inputValue.options.split(','),
+    options: inputValue.options.split(', '),
   });
 }
 
@@ -69,4 +69,10 @@ export async function getProducts() {
       return [];
     })
     .catch(console.error);
+}
+
+export async function getProductById(id) {
+  const products = await getProducts().catch(console.error);
+  const product = products.find((product) => product.id === id);
+  return product ? product : [];
 }
