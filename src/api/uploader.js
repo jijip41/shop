@@ -3,7 +3,7 @@ export async function uploadImg(file) {
   data.append('file', file);
   data.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
-  return fetch(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL, {
+  return await fetch(process.env.REACT_APP_CLOUDINARY_UPLOAD_URL, {
     method: 'POST',
     body: data,
   })
