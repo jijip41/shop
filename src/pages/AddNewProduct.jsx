@@ -12,16 +12,13 @@ function AddNewProduct() {
     e.preventDefault();
     setIsUploading(true);
     uploadImg(file)
-      .then((url) => setProduct((product) => ({ ...product, imageUrl: url })))
-      .then(
-        addProduct(product) //
-          .then(() => {
-            setSuccess('Product is successfully added.');
-            setTimeout(() => {
-              setSuccess(null);
-            }, 5000);
-          })
-      )
+      .then((url) => addProduct(product, url))
+      .then(() => {
+        setSuccess('Product is successfully added.');
+        setTimeout(() => {
+          setSuccess(null);
+        }, 5000);
+      })
       .then(setProduct({}))
       .then(setFile())
       .then(e.target.reset())
@@ -98,7 +95,7 @@ function AddNewProduct() {
           type="text"
           name="options"
           required
-          placeholder="Options"
+          placeholder="Options: please put ',' after each"
           value={product.options ?? ''}
           onChange={handleChange}
         />

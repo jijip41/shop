@@ -49,14 +49,15 @@ async function getUserWithAdmin(user) {
     .catch(console.error);
 }
 
-export function addProduct(inputValue) {
+export async function addProduct(inputValue, url) {
   const db = getDatabase();
   const id = uuid();
   return set(ref(db, `products/${id}`), {
-    ...inputValue,
     id,
     price: parseInt(inputValue.price),
     options: inputValue.options.split(', '),
+    imageUrl: url,
+    ...inputValue,
   });
 }
 
