@@ -77,3 +77,12 @@ export async function getProductById(id) {
   const product = products.find((product) => product.id === id);
   return product ? product : [];
 }
+
+export async function getCartById(userId) {
+  return get(ref(db, `carts/${userId}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      return Object.values(snapshot.val());
+    }
+    return [];
+  });
+}
