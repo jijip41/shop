@@ -4,7 +4,6 @@ import { getProducts } from '../api/firebase';
 import ProductCard from '../components/ProductCard';
 
 export function Products() {
-  // getProducts();
   const {
     isLoading,
     error,
