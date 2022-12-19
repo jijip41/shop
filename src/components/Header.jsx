@@ -3,7 +3,7 @@ import { ShoppingBagOpen, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import User from './User';
 import { useAuthContext } from '../context/AuthContext';
-import Button from './Button';
+import { Button } from './Button';
 import HeaderIcon from './HeaderIcon';
 import CartStatus from './CartStatus';
 

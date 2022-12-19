@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { addOrUpdateProductToCart } from '../api/firebase';
-import Button from '../components/Button';
+import { Button } from '../components/Button';
 import { useAuthContext } from '../context/AuthContext';
 
 function ProductDetail() {

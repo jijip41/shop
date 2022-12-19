@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Button({ content, onClick }) {
+export function Button({ content, onClick }) {
   return (
     <button
       className="rounded-md bg-rose-200 text-gray-600 p-2 font-semibold"
@@ -10,5 +10,3 @@ function Button({ content, onClick }) {
     </button>
   );
 }
-
-export default Button;
