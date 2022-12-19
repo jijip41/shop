@@ -1,10 +1,11 @@
-import React from 'react';
-import { ShoppingBagOpen, ShoppingCartSimple, Pencil } from 'phosphor-react';
+import React, { useState } from 'react';
+import { ShoppingBagOpen, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import User from './User';
-import { useAuthContext } from './context/AuthContext';
+import { useAuthContext } from '../context/AuthContext';
 import Button from './Button';
 import HeaderIcon from './HeaderIcon';
+import CartStatus from './CartStatus';
 
 function Header() {
   const { user, login, logout } = useAuthContext();
@@ -20,17 +21,12 @@ function Header() {
       <div className="flex gap-2 items-center">
         <Link to="/products">Products</Link>
         {user && <User user={user} />}
-        {user && (
-          <HeaderIcon to="/my-cart">
-            <ShoppingCartSimple />
-          </HeaderIcon>
-        )}
+        {user && <CartStatus />}
         {isAdmin && (
           <HeaderIcon to="/products/new">
             <Pencil />
           </HeaderIcon>
         )}
-
         {user && <Button content="LogOut" onClick={logout} />}
         {!user && <Button content="LogIn" onClick={login} />}
       </div>
