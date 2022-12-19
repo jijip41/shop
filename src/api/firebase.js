@@ -91,6 +91,9 @@ export async function getCartById(userId) {
 }
 
 export async function addOrUpdateProductToCart(userId, product) {
+  if (product.quantity === 0) {
+    return removeProductFromCart(userId, product.productId);
+  }
   return set(ref(db, `carts/${userId}/${product.productId}`), product);
 }
 
