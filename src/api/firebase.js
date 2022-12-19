@@ -95,5 +95,6 @@ export async function addOrUpdateProductToCart(userId, product) {
 }
 
 export async function removeProductFromCart(userId, productId) {
-  return remove(`carts/${userId}/${productId}`);
+  console.log('api', userId, productId);
+  return remove(ref(db, `carts/${userId}/${productId}`));
 }

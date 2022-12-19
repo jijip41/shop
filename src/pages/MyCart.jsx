@@ -2,7 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { PlusCircle, MinusCircle, Trash, Equals, Plus } from 'phosphor-react';
 
-import { getCartById } from '../api/firebase';
+import { getCartById, removeProductFromCart } from '../api/firebase';
 import { useAuthContext } from '../context/AuthContext';
 import { Button } from '../components/Button';
 
@@ -15,23 +15,26 @@ export default function MyCart() {
   const { uid } = useAuthContext();
 
   const { data: products } = useQuery(['carts'], () => getCartById(uid));
+
+  const handleRemove = (productId) => {
+    removeProductFromCart(uid, productId);
+  };
+
+  const isCartEmpty = products && products.length === 0;
   return (
     <div className="m-8 md:mx-20">
-      {!products && <p>Your cart is empty</p>}
-      {products && (
+      {isCartEmpty && <p>Your cart is empty</p>}
+      {!isCartEmpty && (
         <ul className="flex flex-col gap-y-4">
           {products.map((product) => (
-            <li key={product.id} className="flex justify-between">
-              <div
-                className="flex flex-row gap-x-8 items-center"
-                key={product.id}
-              >
+            <li key={product.productId} className="flex justify-between">
+              <div className="flex flex-row gap-x-8 items-center">
                 <img
                   alt={product.name}
                   src={product.imageUrl}
                   className="w-20 h-auto md:w-40 rounded-md"
                 ></img>
-                <div key={product.id}>
+                <div>
                   <p className="font-semibold">{product.name}</p>
                   <p className="text-rose-500 font-semibold">
                     {product.option}
@@ -43,7 +46,11 @@ export default function MyCart() {
                 <PlusCircle size={24} className={HOVER} />
                 {product.quantity}
                 <MinusCircle size={24} className={HOVER} />
-                <Trash size={24} className={`${HOVER} text-rose-700`} />
+                <Trash
+                  size={24}
+                  className={`${HOVER} text-rose-700`}
+                  onClick={() => handleRemove(product.productId)}
+                />
               </div>
             </li>
           ))}
