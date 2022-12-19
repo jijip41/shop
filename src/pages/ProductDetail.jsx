@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { addOrUpdateProductToCart } from '../api/firebase';
 import Button from '../components/Button';
+import { useAuthContext } from '../context/AuthContext';
 
 function ProductDetail() {
+  const { user } = useAuthContext();
   const {
     state: {
-      product: { id, imageUrl, name, description, category, options, price },
+      product: { id, imageUrl, name, description, category, price, options },
     },
   } = useLocation();
-  const [optionSelected, setOptionSelected] = useState(options[0]);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addOrUpdateProductToCart(user.uid, {
+      productId: id,
+      category,
+      imageUrl,
+      name,
+      price,
+      option: selectedOption,
+      quantity: 1,
+    });
+  };
 
-  const handleSubmit = (e) => setOptionSelected(e.target.value);
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value);
+  };
   return (
     <>
       <p>Category {`> ${category}`}</p>
@@ -32,10 +49,12 @@ function ProductDetail() {
             <select
               name="options"
               id="options"
+              defaultValue={selectedOption}
               className="outline-none border-2 border-dashed border-rose-400"
+              onChange={handleOptionChange}
             >
               {options.map((option) => (
-                <option value={optionSelected} key={option}>
+                <option value={option} key={option}>
                   {option}
                 </option>
               ))}
