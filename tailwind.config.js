@@ -7,6 +7,10 @@ module.exports = {
         banner: "url('../public/assets/banner.jpg')",
       },
     },
+    fontSize: {
+      '2xs': '0.4rem',
+    },
   },
+
   plugins: [],
 };
