@@ -8,7 +8,9 @@ export function Products() {
     isLoading,
     error,
     data: products,
-  } = useQuery(['products'], getProducts);
+  } = useQuery(['products'], getProducts, {
+    staleTime: 600 * 1000,
+  });
 
   return (
     <main className="w-full h-screen overflow-scroll">
