@@ -1,16 +1,11 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { getProducts } from '../api/firebase';
 import ProductCard from '../components/ProductCard';
+import useProducts from '../hooks/useProducts';
 
 export function Products() {
   const {
-    isLoading,
-    error,
-    data: products,
-  } = useQuery(['products'], getProducts, {
-    staleTime: 600 * 1000,
-  });
+    productsQuery: { isLoading, error, data: products },
+  } = useProducts();
 
   return (
     <main className="w-full h-screen overflow-scroll">
