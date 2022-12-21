@@ -25,7 +25,6 @@ export default function MyCart() {
   };
 
   const handleIncrease = (product) => {
-    console.log('increase', products);
     addOrUpdateProductToCart(uid, {
       ...product,
       quantity: product.quantity + 1,
@@ -33,7 +32,6 @@ export default function MyCart() {
   };
 
   const handleDecrease = (product) => {
-    console.log('decrease', products);
     addOrUpdateProductToCart(uid, {
       ...product,
       quantity: product.quantity - 1,
