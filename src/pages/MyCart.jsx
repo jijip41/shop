@@ -1,14 +1,13 @@
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { PlusCircle, MinusCircle, Trash, Equals, Plus } from 'phosphor-react';
 
 import {
   addOrUpdateProductToCart,
-  getCartById,
   removeProductFromCart,
 } from '../api/firebase';
 import { useAuthContext } from '../context/AuthContext';
 import { Button } from '../components/Button';
+import useCarts from '../hooks/useCarts';
 
 const HOVER = 'hover:scale-105 cursor-pointer';
 const CALCLASSNAME =
@@ -18,7 +17,9 @@ const SHIPPING = 4.5;
 export default function MyCart() {
   const { uid } = useAuthContext();
 
-  const { data: products } = useQuery(['carts'], () => getCartById(uid));
+  const {
+    cartsQuery: { data: products },
+  } = useCarts();
 
   const handleRemove = (productId) => {
     removeProductFromCart(uid, productId);
