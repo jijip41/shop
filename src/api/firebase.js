@@ -51,7 +51,7 @@ async function getUserWithAdmin(user) {
     .catch(console.error);
 }
 
-export async function addProduct(inputValue, url) {
+export async function addNewProduct(inputValue, url) {
   const id = uuid();
 
   return set(ref(db, `products/${id}`), {
@@ -98,6 +98,5 @@ export async function addOrUpdateProductToCart(userId, product) {
 }
 
 export async function removeProductFromCart(userId, productId) {
-  console.log('api', userId, productId);
   return remove(ref(db, `carts/${userId}/${productId}`));
 }
