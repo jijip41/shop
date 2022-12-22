@@ -15,16 +15,15 @@ const CALCLASSNAME =
 const SHIPPING = 4.5;
 
 export default function MyCart() {
-  const { uid } = useAuthContext();
-
   const {
     cartsQuery: { data: products },
     increaseQuantity,
     decreaseQuantity,
+    removeFromCart,
   } = useCarts();
 
   const handleRemove = (productId) => {
-    removeProductFromCart(uid, productId);
+    removeFromCart.mutate(productId);
   };
 
   const handleIncrease = (product) => {
