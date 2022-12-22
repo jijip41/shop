@@ -4,6 +4,7 @@ import { Button } from '../components/Button';
 import useCarts from '../hooks/useCarts';
 
 function ProductDetail() {
+  const [isAdded, setIsAdded] = useState(false);
   const {
     state: {
       product: { id, imageUrl, name, description, category, price, options },
@@ -23,7 +24,12 @@ function ProductDetail() {
       option: selectedOption,
       quantity: 1,
     };
-    addToCart.mutate(product);
+    addToCart.mutate(product, {
+      onSuccess: () => {
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 1000 * 5);
+      },
+    });
   };
 
   const handleOptionChange = (e) => {
@@ -61,6 +67,7 @@ function ProductDetail() {
               ))}
             </select>
             <Button content="Add to Cart" />
+            <p className="w-80">{isAdded && 'Item added successfully 🎉'}</p>
           </form>
         </div>
       </section>
