@@ -19,24 +19,21 @@ export default function MyCart() {
 
   const {
     cartsQuery: { data: products },
+    increaseQuantity,
+    decreaseQuantity,
   } = useCarts();
 
+  console.log(products);
   const handleRemove = (productId) => {
     removeProductFromCart(uid, productId);
   };
 
   const handleIncrease = (product) => {
-    addOrUpdateProductToCart(uid, {
-      ...product,
-      quantity: product.quantity + 1,
-    });
+    increaseQuantity.mutate(product);
   };
 
   const handleDecrease = (product) => {
-    addOrUpdateProductToCart(uid, {
-      ...product,
-      quantity: product.quantity - 1,
-    });
+    decreaseQuantity.mutate(product);
   };
 
   const isCartEmpty = products && products.length === 0;
