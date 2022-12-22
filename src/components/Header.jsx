@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { ShoppingBagOpen, Pencil } from 'phosphor-react';
 import { Link } from 'react-router-dom';
 import User from './User';

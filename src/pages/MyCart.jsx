@@ -1,11 +1,6 @@
 import React from 'react';
 import { PlusCircle, MinusCircle, Trash, Equals, Plus } from 'phosphor-react';
 
-import {
-  addOrUpdateProductToCart,
-  removeProductFromCart,
-} from '../api/firebase';
-import { useAuthContext } from '../context/AuthContext';
 import { Button } from '../components/Button';
 import useCarts from '../hooks/useCarts';
 
