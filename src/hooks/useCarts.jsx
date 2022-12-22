@@ -8,6 +8,13 @@ export default function useCarts(props) {
 
   const cartsQuery = useQuery(['carts'], () => getCartById(uid));
 
+  const addToCart = useMutation(
+    (product) => {
+      addOrUpdateProductToCart(uid, product);
+    },
+    { onSuccess: () => queryClient.invalidateQueries(['carts']) }
+  );
+
   const decreaseQuantity = useMutation(
     (product) =>
       addOrUpdateProductToCart(uid, {
@@ -26,27 +33,5 @@ export default function useCarts(props) {
     { onSuccess: () => queryClient.invalidateQueries(['carts']) }
   );
 
-  return { cartsQuery, decreaseQuantity, increaseQuantity };
+  return { cartsQuery, decreaseQuantity, increaseQuantity, addToCart };
 }
-
-// category
-// :
-// "Women"
-// imageUrl
-// :
-// "http://res.cloudinary.com/dbme8gnz9/image/upload/v1671467664/g2j35i8xmiw90hrw6xhv.webp"
-// name
-// :
-// "Shorts"
-// option
-// :
-// "XS"
-// price
-// :
-// 89
-// productId
-// :
-// "0d227b80-bbed-4a0f-bdbd-9751d2e3d15a"
-// quantity
-// :
-// 4

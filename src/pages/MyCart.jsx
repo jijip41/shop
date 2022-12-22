@@ -23,7 +23,6 @@ export default function MyCart() {
     decreaseQuantity,
   } = useCarts();
 
-  console.log(products);
   const handleRemove = (productId) => {
     removeProductFromCart(uid, productId);
   };
