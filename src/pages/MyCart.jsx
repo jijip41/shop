@@ -12,9 +12,8 @@ const SHIPPING = 4.5;
 export default function MyCart() {
   const {
     cartsQuery: { data: products },
-    increaseQuantity,
-    decreaseQuantity,
     removeFromCart,
+    addToCart,
   } = useCarts();
 
   const handleRemove = (productId) => {
@@ -22,11 +21,11 @@ export default function MyCart() {
   };
 
   const handleIncrease = (product) => {
-    increaseQuantity.mutate(product);
+    addToCart.mutate({ ...product, quantity: product.quantity + 1 });
   };
 
   const handleDecrease = (product) => {
-    decreaseQuantity.mutate(product);
+    addToCart.mutate({ ...product, quantity: product.quantity - 1 });
   };
 
   const isCartEmpty = products && products.length === 0;

@@ -22,28 +22,8 @@ export default function useCarts(props) {
     { onSuccess: () => queryClient.invalidateQueries(['carts']) }
   );
 
-  const decreaseQuantity = useMutation(
-    (product) =>
-      addOrUpdateProductToCart(uid, {
-        ...product,
-        quantity: product.quantity - 1,
-      }),
-    { onSuccess: () => queryClient.invalidateQueries(['carts']) }
-  );
-
-  const increaseQuantity = useMutation(
-    (product) =>
-      addOrUpdateProductToCart(uid, {
-        ...product,
-        quantity: product.quantity + 1,
-      }),
-    { onSuccess: () => queryClient.invalidateQueries(['carts']) }
-  );
-
   return {
     cartsQuery,
-    decreaseQuantity,
-    increaseQuantity,
     addToCart,
     removeFromCart,
   };
