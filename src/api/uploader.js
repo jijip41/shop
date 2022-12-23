@@ -8,5 +8,5 @@ export async function uploadImg(file) {
     body: data,
   })
     .then((res) => res.json())
-    .then((data) => data.url);
+    .then((data) => data.url.replace('http', 'https'));
 }
